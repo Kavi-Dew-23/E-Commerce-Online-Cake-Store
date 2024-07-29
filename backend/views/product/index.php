@@ -34,6 +34,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 ]
             ],
             [
+                'label' => 'Image',
                 'attribute' => 'image',
                 'content' => function($model){
                     /** @var  \common\models\Product $model */

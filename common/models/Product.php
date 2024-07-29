@@ -104,7 +104,7 @@ class Product extends \yii\db\ActiveRecord
 
         $ok = parent::save($runValidation, $attributeNames);
 
-        if ($ok) {
+        if ($ok && $this->imageFile) {
             $fullPath = Yii::getAlias('@frontend/web/storage'. $this->image);
           
             $dir = dirname($fullPath);
@@ -112,15 +112,23 @@ class Product extends \yii\db\ActiveRecord
                 $transaction->rollBack();
                 return false;
             }
-            $transaction->commit();
+            
         }
-
+        $transaction->commit();
 
         return $ok;
 
     }
     public function getImageUrl(){
         return Yii::$app->params['frontendUrl'] .'/storage'. $this->image;
+    }
+    public function getCreatedBy()
+    {
+        return $this->hasOne(User::class, ['id' => 'created_by']);
+    }
+    public function getUpdatedBy()
+    {
+        return $this->hasOne(User::class, ['id' => 'updated_by']);
     }
 }
 
