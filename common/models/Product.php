@@ -7,6 +7,7 @@ use yii\base\Behavior;
 use yii\behaviors\BlameableBehavior;
 use yii\behaviors\TimestampBehavior;
 use yii\helpers\FileHelper;
+use yii\helpers\StringHelper;
 use yii\web\UploadedFile;
 
 /**
@@ -133,6 +134,11 @@ class Product extends \yii\db\ActiveRecord
     public function getUpdatedBy()
     {
         return $this->hasOne(User::class, ['id' => 'updated_by']);
+    }
+    public function getShortDescription()
+    {
+        return StringHelper::truncateWords(strip_tags($this->description),30);
+
     }
 }
 

@@ -101,3 +101,6 @@ a.desc:after {
 {
     text-decoration: none;
 }
+.navbar-nav{
+    margin-left: auto;
+}
